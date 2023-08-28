@@ -14,44 +14,44 @@ Test process:
 Download address: this website page https://cn.wordpress.org/plugins/ input plugin author name
 The User Private Files to download at https://cn.wordpress.org/plugins/user-private-files/
 
-![image-xss1.1[WordPressFile]](xss1.1[WordPressFile].png)
+![image-xss1.1[WordPressFile]](images/xss1.1[WordPressFile].png)
 
-![image-xss1.2[WordPressFile]](xss1.2[WordPressFile].png)
+![image-xss1.2[WordPressFile]](images/xss1.2[WordPressFile].png)
 
 2.导航到URL:http://www.test.com/wp-admin/admin.php?page=upvf-free
 
-![image-xss1.3[WordPressFile]](xss1.3[WordPressFile].png)
+![image-xss1.3[WordPressFile]](images/xss1.3[WordPressFile].png)
 
 3. Launch Burp Suite to capture network traffic. Use Burpsuite to capture and change packets for detection:
 
-![image-xss1.4[WordPressFile]](xss1.4[WordPressFile].png)
+![image-xss1.4[WordPressFile]](images/xss1.4[WordPressFile].png)
 
 4.Change the value of the parameter upfp_email_content_field in the post request to </TeXtArEa><sCrIpT>alert(2)</ScRiPt>, and then send the modified request,
 
 
-![image-xss1.5[WordPressFile]](xss1.5[WordPressFile].png)
+![image-xss1.5[WordPressFile]](images/xss1.5[WordPressFile].png)
 
 5.A pop-up window will appear on the web page, and the alarm box showing 2 will trigger XSS, indicating that there is cross-site vulnerability, record vulnerability, logout and re-login will still trigger XSS. Stop testing.
 Change the value of the upfp_email_content_field parameter to </TeXtArEa><sCrIpT>alert(2)</ScRiPt>
 
-![image-xss1.6[WordPressFile]](xss1.6[WordPressFile].png)
+![image-xss1.6[WordPressFile]](images/xss1.6[WordPressFile].png)
 
 6. When you switch from user name x to user account "bob" (which also has administrator rights), XSS is still triggered when you access the url again, and the alarm box 2 is still displayed. It indicates that the XSS is a Stored XSS.
 
-![image-xss1.7[WordPressFile]](xss1.7[WordPressFile].png)
+![image-xss1.7[WordPressFile]](images/xss1.7[WordPressFile].png)
 
 7.View the page source code and find that it has been saved in the page for a long time:
 
-![image-xss1.8[WordPressFile]](xss1.8[WordPressFile].png)
+![image-xss1.8[WordPressFile]](images/xss1.8[WordPressFile].png)
 
 8. It is not only the upfp_email_content_field parameter that causes Stored-type XSS. In addition, the upfp_email_subject_field parameter can cause XSS. XSS can also be triggered by setting the POST request parameter upfp_email_subject_field to "OnMoUsEoVeR=prompt(1)//, and then sending the modified request.
 Change the value of upfp_email_subject_field to "OnMoUsEoVeR=prompt(1)//, and then send the modified request.
 
-![image-xss1.9[WordPressFile]](xss1.9[WordPressFile].png)
+![image-xss1.9[WordPressFile]](images/xss1.9[WordPressFile].png)
 
 An alarm box with 1 is displayed:
 
-![image-xss1.10[WordPressFile]](xss1.10[WordPressFile].png)
+![image-xss1.10[WordPressFile]](images/xss1.10[WordPressFile].png)
 
 XSS protection:
 
